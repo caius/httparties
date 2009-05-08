@@ -7,19 +7,11 @@ class ManlyLiving
   base_uri "http://api.manlyliving.org"
 
   def self.latest
-    normalise(get("/fetch/latest")['rules']['rule'])
+    get("/fetch/latest")['rules']['rule']
   end
 
   def self.random
-    normalise(get("/fetch/random")['rules']['rule'])
-  end
-
-  private
-
-  # This is here because the API sometimes returns escaped 's.
-  def self.normalise hash={}
-    hash["content"] = hash["content"].gsub(/\\'/, "'")
-    hash
+    get("/fetch/random")['rules']['rule']
   end
 
 end
